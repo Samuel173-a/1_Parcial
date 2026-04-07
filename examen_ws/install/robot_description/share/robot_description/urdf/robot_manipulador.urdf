@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<robot name="robot_RRR">
+
+    <material name="link_color"><color rgba="0.8 0.5 0.2 1"/></material>
+    <material name="joint_color"><color rgba="0.1 0.1 0.6 1"/></material>
+
+    <!-- BASE -->
+    <link name="base_link">
+        <visual>
+            <geometry><box size="0.2 0.2 0.2"/></geometry>
+            <material name="joint_color"/>
+        </visual>
+    </link>
+
+    <!-- ===================== -->
+    <!-- JOINT 1 (q1) -->
+    <!-- ===================== -->
+    <joint name="q1" type="revolute">
+        <parent link="base_link"/>
+        <child link="link1"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14" upper="3.14" effort="10" velocity="1"/>
+    </joint>
+
+    <!-- LINK 1 (vertical: 2L = 3) -->
+    <link name="link1">
+        <visual>
+            <origin xyz="0 0 1.5" rpy="0 0 0"/>
+            <geometry><cylinder length="3" radius="0.15"/></geometry>
+            <material name="link_color"/>
+        </visual>
+    </link>
+
+    <joint name="fix_offset" type="fixed">
+        <parent link="link1"/>
+        <child link="link_offset"/>
+        <!-- en la punta del link vertical -->
+        <origin xyz="0 0 3" rpy="0 0 0"/>
+    </joint>
+
+    <link name="link_offset">
+        <visual>
+            <!-- centro entre (0,0,3) y (0,1.5,3) -->
+            <origin xyz="0 0.75 0" rpy="1.570796 0 0"/>
+            <geometry>
+            <cylinder length="1.5" radius="0.15"/>
+            </geometry>
+            <material name="link_color"/>
+        </visual>
+    </link>
+    
+
+    <!-- ===================== -->
+    <!-- JOINT 2 (q2) -->
+    <!-- ===================== -->
+    <joint name="q2" type="revolute">
+        <parent link="link1"/>
+        <child link="link2"/>
+        <!-- en la punta del link vertical -->
+        <origin xyz="0 1.5 3" rpy="1.570796 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14" upper="3.14" effort="10" velocity="1"/>
+    </joint>
+
+    <!-- LINK 2 (horizontal: L) -->
+    <link name="link2">
+        <visual>
+            <origin xyz="0.75 0 0" rpy="0 0 0"/>
+            <geometry><box size="1.5 0.3 0.3"/></geometry>
+            <material name="link_color"/>
+        </visual>
+    </link>
+
+    <!-- ===================== -->
+    <!-- JOINT 3 (q3) -->
+    <!-- ===================== -->
+    <joint name="q3" type="revolute">
+        <parent link="link2"/>
+        <child link="link3"/>
+        <origin xyz="1.5 0 0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14" upper="3.14" effort="10" velocity="1"/>
+    </joint>
+
+    <!-- LINK 3 (horizontal: L) -->
+    <link name="link3">
+        <visual>
+            <origin xyz="0.75 0 0" rpy="0 0 0"/>
+            <geometry><box size="1.5 0.3 0.3"/></geometry>
+            <material name="link_color"/>
+        </visual>
+    </link>
+
+
+
+    <link name="ee_link">
+        <visual>
+            <geometry>
+                <sphere radius="0.2"/>
+            </geometry>
+            <material name="joint_color"/>
+        </visual>
+    </link>
+
+    <joint name="tool0" type="fixed">
+        <parent link="link3"/>
+        <child link="ee_link"/>
+        <!-- en la punta del último link -->
+        <origin xyz="1.5 0 0" rpy="0 0 0"/>
+    </joint>
+</robot>
