@@ -1,8 +1,10 @@
 PRIMER PARCIAL 
+
 Este repositorio contiene la configuración y los nodos de ROS 2 para el control del Robot_A de 3 Grados de Libertad 
 y el Robot Bioinspirado de 4 Grados de Libertad mediante Cinemática Inversa.
 
 REQUISITOS Y COMPILACION ROBOT_A
+
 Se tiene que ingresar a la carpeta examen_ws el cual es nuestro workspace, se compila el programa usando el comando:
 colcon build
 de ahi se usa:
@@ -22,6 +24,7 @@ ros2 topic pub /target_position geometry_msgs/msg/Point "{x: 3.0, y: 0.0, z: 3.0
 lo que hace el comando es poner el robot en punto de reposo.
 
 REQUISITOS Y COMPILACION ROBOT_BIOINSPIRADO
+
 Se tiene que ingresar a la carpeta examen_ws el cual es nuestro workspace, se compila el programa usando el comando:
 colcon build
 de ahi se usa:
@@ -41,6 +44,7 @@ ros2 topic pub /target_position geometry_msgs/msg/Point "{x: 23.0, y: 0.0, z: 0.
 lo que hace el comando es poner el robot en punto de reposo.
 
 EXTRA  
+
 En las carpeta de robot_description/launch, en esa carpeta se encuentra dos archivos view_robot.launch.py (pertenece al robot_bioinspirado) y 
 view_robot1.launch.py (pertenece al robot_A)
 En la carpeta de robot_description/urdf, en esa carpeta se encuentra dos archivos robot_bioinspirado.urdf (pertenece al robot_bioinspirado) y 
